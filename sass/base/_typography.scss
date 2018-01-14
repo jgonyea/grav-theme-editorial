@@ -101,11 +101,17 @@
 		h1 {
 			font-size: 3.5em;
 		}
+		.posttime h2 {
+			font-size: 2.8em;
+		}
 	}
 
 	@include breakpoint(medium) {
 		h1 {
 			font-size: 3.25em;
+		}
+		.posttime h2 {
+			font-size: 2.6em;
 		}
 	}
 
@@ -115,7 +121,8 @@
 			line-height: 1.4;
 		}
 
-		h2 {
+		.posttime h2 {
+          line-height: 1.0;
 			font-size: 1.5em;
 		}
 	}
