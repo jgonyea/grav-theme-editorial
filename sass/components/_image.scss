@@ -5,7 +5,9 @@
 ///
 
 /* Image */
-
+img {
+	max-width: 100%;
+}
 	.image {
 		border-radius: _size(border-radius);
 		border: 0;
