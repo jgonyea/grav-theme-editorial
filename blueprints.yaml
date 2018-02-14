@@ -1,5 +1,5 @@
 name: Editorial
-version: 0.1.1
+version: 0.1.2
 description: Port of the Editorial theme from HTML5Up.net
 icon: paint-brush
 author:
@@ -13,6 +13,7 @@ license: MIT
 
 dependencies:
   - auto-date
+  - simplesearch
 
 
 form:

@@ -1,3 +1,14 @@
+# v0.1.2
+##  02/14/2018
+
+1. [](#new)
+    * Added Simplesearch dependency.
+    * Search functionality works now.
+2. [](#improved)
+    * Styling on images (thanks to andreakal).
+3. [](#bugfix)
+    * None
+
 # v0.1.1
 ##  02/05/2018
 
