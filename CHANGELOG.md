@@ -1,3 +1,13 @@
+# v0.1.3
+##  02/14/2018
+
+1. [](#new)
+    * Default state of sidebar is now configurable.
+2. [](#improved)
+    * None
+3. [](#bugfix)
+    * Child pages in navigation now render properly.
+
 # v0.1.2
 ##  02/14/2018
 

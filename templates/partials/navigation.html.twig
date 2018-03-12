@@ -1,20 +1,24 @@
-{% macro loop(page) %}
+
+{% macro nav_loop(page) %}
+
     {% for p in page.children.visible %}
-        {% set current_page = (p.active or p.activeChild) ? 'selected' : '' %}
+        {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
         {% if p.children.visible.count > 0 %}
-            <li class="has-children {{ current_page }}">
-                <a href="{{ p.url }}">
-                    {% if p.header.icon %}<i class="fa fa-{{ p.header.icon }}"></i>{% endif %}
+            <li>
+                {% if grav.theme.config['dropdown']['enabled'] %}
+                  <a href="{{ p.url }}" class="opener {{ active_page }}">
+                {% else %}
+                  <a href="{{ p.url }}" class="{{ active_page }}">
+                {% endif %}
                     {{ p.menu }}
                 </a>
                 <ul>
-                    {{ _self.loop(p) }}
+                    {{ _self.nav_loop(p) }}
                 </ul>
             </li>
         {% else %}
-            <li class="{{ current_page }}">
-                <a href="{{ p.url }}">
-                    {% if p.header.icon %}<i class="fa fa-{{ p.header.icon }}"></i>{% endif %}
+            <li>
+                <a href="{{ p.url }}" class="{{ active_page }}">
                     {{ p.menu }}
                 </a>
             </li>
@@ -22,27 +26,6 @@
     {% endfor %}
 {% endmacro %}
 
-<ul>
-    {% if theme_config.dropdown.enabled %}
-        {{ _self.loop(pages) }}
-    {% else %}
-        {% for page in pages.children.visible %}
-            {% set current_page = (page.active or page.activeChild) ? 'selected' : '' %}
-            <li class="{{ current_page }}">
-                <a href="{{ page.url }}">
-                    {% if page.header.icon %}<i class="fa fa-{{ page.header.icon }}"></i>{% endif %}
-                    {{ page.menu }}
-                </a>
-            </li>
-        {% endfor %}
-    {% endif %}
-    {% for mitem in site.menu %}
-        <li>
-            <a href="{{ mitem.url }}">
-                {% if mitem.icon %}<i class="fa fa-{{ mitem.icon }}"></i>{% endif %}
-                {{ mitem.text }}
-            </a>
-        </li>
-    {% endfor %}
+<ul {{ tree ? 'class="tree"' : '' }}>
+    {{ _self.nav_loop(pages) }}
 </ul>
-
