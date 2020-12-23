@@ -6,9 +6,9 @@
 
 /* Sidebar */
 
-	.search-wrapper {
+	#search {
 		form {
-			@include icon;
+			@include icon(false, solid);
 			position: relative;
 
 			&:before {
@@ -83,7 +83,7 @@
 		}
 
 		.toggle {
-			@include icon;
+			@include icon(false, solid);
 			@include vendor('transition', 'left 0.5s ease');
 			-webkit-tap-highlight-color: rgba(255,255,255,0);
 			border: 0;
@@ -95,7 +95,8 @@
 			overflow: hidden;
 			position: absolute;
 			text-align: center;
-			text-indent: 7.5em;
+			text-indent: -15em;
+			white-space: nowrap;
 			top: 0;
 			width: 6em;
 			z-index: _misc(z-index-base);
@@ -117,7 +118,7 @@
 			margin-left: (_size(sidebar-width) * -1);
 		}
 
-		@include breakpoint(xlarge) {
+		@include breakpoint('<=xlarge') {
 			$pad: 1.5em / 0.9;
 
 			width: _size(sidebar-width-alt);
@@ -150,7 +151,7 @@
 			}
 		}
 
-		@include breakpoint(large) {
+		@include breakpoint('<=large') {
 			box-shadow: 0 0 5em 0 rgba(0, 0, 0, 0.175);
 			height: 100%;
 			left: 0;
@@ -189,12 +190,12 @@
 				}
 			}
 
-			body.is-loading & {
+			body.is-preload & {
 				display: none;
 			}
 		}
 
-		@include breakpoint(small) {
+		@include breakpoint('<=small') {
 			.toggle {
 				text-indent: 7.25em;
 				width: 7.25em;

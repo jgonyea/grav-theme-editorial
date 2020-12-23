@@ -1,24 +1,17 @@
-
-{% macro nav_loop(page) %}
-
+{% macro loop(page) %}
     {% for p in page.children.visible %}
-        {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
+        {% set current_page = (p.active or p.activeChild) ? 'selected' : '' %}
         {% if p.children.visible.count > 0 %}
             <li>
-                {% if grav.theme.config['dropdown']['enabled'] %}
-                  <a href="{{ p.url }}" class="opener {{ active_page }}">
-                {% else %}
-                  <a href="{{ p.url }}" class="{{ active_page }}">
-                {% endif %}
-                    {{ p.menu }}
-                </a>
+                <span class="opener">{{ p.menu }}</span>
                 <ul>
-                    {{ _self.nav_loop(p) }}
+                    {{ _self.loop(p) }}
                 </ul>
             </li>
         {% else %}
             <li>
-                <a href="{{ p.url }}" class="{{ active_page }}">
+                <a href="{{ p.url }}">
+                    {% if p.header.icon %}<i class="fa fa-{{ p.header.icon }}"></i>{% endif %}
                     {{ p.menu }}
                 </a>
             </li>
@@ -26,6 +19,24 @@
     {% endfor %}
 {% endmacro %}
 
-<ul {{ tree ? 'class="tree"' : '' }}>
-    {{ _self.nav_loop(pages) }}
-</ul>
+<!-- Menu -->
+    <nav id="menu">
+        <header class="major">
+            <h2>Menu</h2>
+        </header>
+        <ul>
+            {% if theme_config.dropdown.enabled %}
+                {{ _self.loop(pages) }}
+            {% else %}
+                {% for page in pages.children.visible %}
+                    {% set current_page = (page.active or page.activeChild) ? 'selected' : '' %}
+                    <li class="{{ current_page }}">
+                        <a href="{{ page.url }}">
+                            {% if page.header.icon %}<i class="fa fa-{{ page.header.icon }}"></i>{% endif %}
+                            {{ page.menu }}
+                        </a>
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </nav>

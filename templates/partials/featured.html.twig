@@ -4,7 +4,7 @@
     <header class="major">
             <h2>Featured</h2>
     </header>
-    <div class="mini-posts">
+        <div class="mini-posts">
         {% for p in featuredPages %}
             <article>
                 <a href="{{ p.url }}" class="featured-title"><h2>{{ p.title }}</h2></a>
@@ -13,15 +13,10 @@
                     <a href="{{ p.url }}" class="image">{{ p.media[image.name].html("",p.title) }} </a>
                 {% endif %}
 
-                <p>{{ p.summary(100) }}</p>
+                <p>{{ p.summary(100)|striptags }}</p>
             </article>
         {% endfor %}
-    </div>
-    <!--
-    <ul class="actions">
-            <li><a href="#" class="button">More</a></li>
-    </ul>
-    -->
 
+        </div>
 </section> <!-- End of featured Section -->
 {% endif %}

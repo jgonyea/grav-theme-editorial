@@ -11,7 +11,7 @@
 			@include vendor('user-select', 'none');
 			color: _palette(fg-bold);
 			font-family: _font(family-heading);
-			font-family: _font(weight-heading-alt);
+			font-weight: _font(weight-heading-alt);
 			letter-spacing: _font(kerning-heading);
 			list-style: none;
 			margin-bottom: 0;
@@ -32,7 +32,7 @@
 
 				&.opener {
 					@include vendor('transition', 'color #{_duration(transition)} ease-in-out');
-					@include icon;
+					@include icon(false, solid);
 					-webkit-tap-highlight-color: rgba(255,255,255,0);
 					position: relative;
 

@@ -1,0 +1,34 @@
+{
+  "name": "editorial",
+  "version": "1.0.0",
+  "homepage": "https://github.com/jgonyea/grav-theme-editorial",
+  "author": "Jeremy Gonyea <jeremy.gonyea@gmail.com>",
+  "description": "Grav port of the Editorial theme from HTML5Up.net",
+  "main": "css-compiled/main.css",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jgonyea/grav-theme-editorial"
+  },
+  "license": "MIT",
+  "keywords": [
+    "grav",
+    "theme",
+    "html5up",
+    "editorial"
+  ],
+  "bugs": {
+    "url": "https://github.com/jgonyea/grav-theme-editorial/issues"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-csscomb": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-pug": "^4.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.1.0",
+    "jstransformer-highlight": "^2.0.0",
+    "jstransformer-markdown-it": "^2.1.0"
+  }
+}

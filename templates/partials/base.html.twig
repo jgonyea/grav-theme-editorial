@@ -1,71 +1,109 @@
 {% set theme_config = attribute(config.themes, config.system.pages.theme) %}
-<!DOCTYPE html>
-<html lang="{{ grav.language.getActive ?: config.site.default_lang }}">
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}">
 <head>
-{% block head %}
+    {% block head %}
     <meta charset="utf-8" />
     <title>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     {% include 'partials/metadata.html.twig' %}
-    <link rel="icon" type="image/png" href="{{ url('theme://images/logo.png') }}" />
+
+    <link rel="icon" type="image/png" href='{{ theme_url }}/images/logo.png' />
     <link rel="canonical" href="{{ page.url(true, true) }}" />
+    {% endblock head %}
 
     {% block stylesheets %}
-        {% do assets.addCss('https://unpkg.com/purecss@1.0.0/build/pure-min.css', 100) %}
-        {% do assets.addCss('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', 99) %}
-        {% do assets.addCss('theme://css/main.css', 97) %}
-        {% do assets.addCss('theme://css/custom.css', 97) %}
+        {% do assets.addCss('theme://css/main.css', 99) %}
+        {% do assets.addCss('theme://css/fontawesome-all.min.css', 99) %}
+        {% do assets.addCss('theme://css/custom.css', 98) %}
     {% endblock %}
-    {{ assets.css() }}
 
     {% block javascripts %}
-        {% do assets.addJs('jquery', 100) %}
-        {% do assets.addJs('theme://js/skel.min.js', 99) %}
-        {% do assets.addJs('theme://js/util.js', 98) %}
-        {% do assets.addJs('theme://js/main.js', {'priority':97, 'group':'bottom'}) %}
+        {% do assets.addJs('theme://js/jquery.min.js', 100) %}
+        {% do assets.addJs('theme://js/browser.min.js') %}
+        {% do assets.addJs('theme://js/breakpoints.min.js') %}
+        {% do assets.addJs('theme://js/util.js') %}
+        {% do assets.addJs('theme://js/main.js', {group:'bottom'}) %}
     {% endblock %}
-    {{ assets.js() }}
 
-{% endblock head%}
+    {% block assets deferred %}
+        {{ assets.css()|raw }}
+        {{ assets.js()|raw }}
+    {% endblock %}
+
 </head>
-<body id="top" class="{{ page.header.body_classes }}">
+    <body class="is-preload {{ page.header.body_classes }}">
 
-<div id="wrapper">
-    <div id="main">
-        <div class="inner">
-            {% block header %}
-            <header id="header">
-                <a class="logo" href="{{ base_url == '' ? '/' : base_url }}"><strong>{{ config.site.title }}</strong> {{theme_config.themeSlogan}}</a>
-                {% include 'partials/socialIcons.html.twig' %}
-            </header><!-- End #header -->
-            {% endblock %}
-            {% block body %}
-            <section>
-                <header class="main">
-                    <h1>{{ page.title }}</h1>
-                </header>
-                {% if page.header.primaryImage %}
-                    {% set primaryImage = ((page.header.primaryImage)|first) %}
+        <!-- Wrapper -->
+            <div id="wrapper">
 
-                    <span class="image main">{{ page.media[primaryImage.name].html() }}</span>
-                {% endif %}
-                {% block content %}{% endblock %}
-            </section><!-- End section -->
-            {% endblock %}
+                <!-- Main -->
+                    <div id="main">
+                        <div class="inner">
 
-        </div> <!-- End .inner -->
-    </div><!-- End #main -->
+                            <!-- Header -->
+                                <header id="header">
+                                    <a href="{{ site.url}}" class="logo"><strong>{{ site.title }}</strong> by {{ site.author.name }}</a>
+                                    {% if count(site.social_icons) > 0 %}
+                                    <ul class="icons">
+                                        {% for social in site.social_icons %}
+                                        <li><a href="{{ social.url }}" class="icon brands fa-{{ social.icon }}"><span class="label">{{ social.label }}</span></a></li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                </header>
 
-{% block sidebar %}
-    {%  include 'partials/sidebar.html.twig' %}
-{% endblock %}
+							<!-- Content -->
+                                <section>
+                                {% block content %}
+                                    {{ page.content }}
+                                {% endblock%}
+                                </section>
 
+						</div>
+					</div>
 
-</div> <!--End #wrapper -->
-{% block bottom %}
-    {{ assets.js('bottom') }}
-{% endblock %}
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
 
-</body>
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+                               {% include 'partials/navigation.html.twig' %}
+
+							<!-- Featured Section -->
+                                {% include 'partials/featured.html.twig' %}
+
+                            <!-- Contact Section -->
+                                {% include 'partials/contact.html.twig' %}
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+        {% block bottom %}
+            {{ assets.js('bottom')|raw }}
+        {% endblock %}
+
+    </body>
 </html>
